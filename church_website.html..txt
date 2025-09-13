@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grace and Truth Church - A Christian Community in the Philippines</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #f7fafc;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://placehold.co/1920x1080/4F46E5/FFFFFF?text=Welcome+Home');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .section-heading {
+            border-bottom: 2px solid #4F46E5;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .nav-link:hover {
+            color: #4F46E5;
+        }
+        .btn-primary {
+            background-color: #4F46E5;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #4338CA;
+        }
+        .ministry-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .ministry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #888;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center flex-wrap">
+            <a href="#home" class="text-2xl font-bold text-gray-800">Grace and Truth Church</a>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div id="nav-menu" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-8 text-lg font-medium">
+                <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">Home</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">About Us</a>
+                <a href="#sermons" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">Sermons</a>
+                <a href="#ministries" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">Ministries</a>
+                <a href="#events" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">Events</a>
+                <a href="#give" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">Give</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors duration-300">Contact Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="max-w-4xl px-6">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">Welcome Home, Ka-Pamilya!</h1>
+            <p class="text-lg md:text-2xl font-medium mb-6">Find faith, family, and purpose with us here in Quezon City, Metro Manila.</p>
+            <a href="#what-to-expect" class="inline-block px-8 py-4 rounded-full btn-primary font-bold text-xl uppercase tracking-wider shadow-lg">Plan Your Visit</a>
+        </div>
+    </section>
+
+    <!-- Welcome & Service Times -->
+    <section class="py-16 md:py-24 bg-white" id="welcome-message">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Us in Worship</h2>
+            <p class="text-lg text-gray-600 mb-8">We would love to have you join our Sunday service. Whether you're a first-time visitor or a long-time member, you are family here.</p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8">
+                <div class="bg-gray-100 p-8 rounded-2xl shadow-md w-full md:w-auto max-w-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Sunday Worship Service</h3>
+                    <p class="text-4xl font-bold text-indigo-600">9:00 AM</p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-2xl shadow-md w-full md:w-auto max-w-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Mid-week Bible Study</h3>
+                    <p class="text-4xl font-bold text-indigo-600">7:00 PM</p>
+                    <p class="text-sm text-gray-500">(Wednesday)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What to Expect Section -->
+    <section class="py-16 md:py-24 bg-gray-50" id="what-to-expect">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">What to Expect</h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">First time visiting a new church can be intimidating. Here are some common questions we get to help you feel more comfortable.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="font-bold text-xl mb-2">What should I wear?</h3>
+                    <p class="text-gray-600">"Come as you are! We have a mix of everything from casual attire (jeans and a t-shirt) to more traditional Sunday clothes. The most important thing is that you're here."</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="font-bold text-xl mb-2">How long is the service?</h3>
+                    <p class="text-gray-600">"Our Sunday service usually lasts about 90 minutes. We have a time of praise and worship, announcements, and a message from the pastor."</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="font-bold text-xl mb-2">Do you have anything for kids?</h3>
+                    <p class="text-gray-600">"Yes! We have a dedicated children's ministry during our Sunday service where kids can learn about Jesus in a fun and safe environment."</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="font-bold text-xl mb-2">Are visitors required to give?</h3>
+                    <p class="text-gray-600">"Not at all. The offering is for our regular attendees to give back to God through our church. As our guest, you are not expected to give."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">Our Community in Pictures</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Worship" alt="Worship service" class="rounded-xl shadow-lg w-full h-auto">
+                <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Fellowship" alt="Church fellowship" class="rounded-xl shadow-lg w-full h-auto">
+                <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Community" alt="Community outreach" class="rounded-xl shadow-lg w-full h-auto">
+                <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Bible+Study" alt="Bible study" class="rounded-xl shadow-lg w-full h-auto">
+                <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Baptism" alt="Baptism" class="rounded-xl shadow-lg w-full h-auto">
+                <img src="https://placehold.co/600x400/818CF8/FFFFFF?text=Youth+Group" alt="Youth group" class="rounded-xl shadow-lg w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="py-16 md:py-24 bg-gray-50" id="about">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">About Us</h2>
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Story: A Family of Faith</h3>
+                <p class="text-lg text-gray-600 mb-8">Grace and Truth Church was founded in 20XX with a simple desire to be a light in our local community. From a small Bible study group, we have grown into a loving "simbahan" (church) where every person is embraced as "ka-pamilya" (family). Our journey is a testament to God's faithfulness and the beautiful "bayanihan" (community spirit) of our people.</p>
+                <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
+                    <h4 class="text-xl font-semibold mb-4">Our Mission & Beliefs</h4>
+                    <p class="text-gray-700 mb-4">**Mission:** To make disciples who love God, love one another, and serve our community.</p>
+                    <p class="text-gray-700 mb-4">**Core Beliefs:**</p>
+                    <ul class="list-disc list-inside text-gray-600 text-left space-y-2">
+                        <li>We believe in one God, eternally existing in three persons: the Father, the Son, and the Holy Spirit.</li>
+                        <li>We believe the Bible is the inspired, inerrant Word of God and the ultimate authority for faith and life.</li>
+                        <li>We believe that salvation is a gift from God, received by grace through faith in Jesus Christ alone.</li>
+                        <li>We believe in the power of prayer and the importance of a personal relationship with God.</li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-2xl font-bold mb-4">Meet Our Pastor</h4>
+                    <div class="inline-block bg-white p-6 rounded-2xl shadow-md">
+                        <img src="https://placehold.co/200x200/4F46E5/FFFFFF?text=Pastor" alt="Pastor's photo" class="rounded-full mx-auto mb-4 w-32 h-32 md:w-48 md:h-48 object-cover">
+                        <h5 class="text-xl font-semibold">Pastor [Pastor's Name]</h5>
+                        <p class="text-gray-600 text-sm italic">"I am passionate about seeing lives transformed by the power of Jesus Christ."</p>
+                        <p class="text-gray-700 mt-4">Pastor [Pastor's Name] has been serving in ministry for over [Number] years. He and his wife, [Wife's Name], have [Number] children. His life verse is John 3:16.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sermons Section -->
+    <section class="py-16 md:py-24 bg-white" id="sermons">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">Sermon Archives</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-center items-center space-x-4 mb-8">
+                    <div class="flex items-center space-x-2">
+                        <label for="speaker-select" class="text-gray-600">Speaker:</label>
+                        <select id="speaker-select" class="rounded-md border-gray-300 shadow-sm p-2">
+                            <option value="all">All Speakers</option>
+                            <option value="pastor-name">Pastor [Pastor's Name]</option>
+                            <option value="guest-speaker">Guest Speaker</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label for="sort-select" class="text-gray-600">Sort by:</label>
+                        <select id="sort-select" class="rounded-md border-gray-300 shadow-sm p-2">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Sermon List (placeholder) -->
+                <div id="sermon-list" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-gray-100 p-6 rounded-2xl shadow-md">
+                        <iframe class="w-full aspect-video rounded-xl mb-4" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <h3 class="text-xl font-bold mb-2">The Good Shepherd</h3>
+                        <p class="text-gray-600">**Speaker:** Pastor [Pastor's Name]</p>
+                        <p class="text-gray-600">**Date:** September 8, 2025</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-2xl shadow-md">
+                        <iframe class="w-full aspect-video rounded-xl mb-4" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <h3 class="text-xl font-bold mb-2">Grace Upon Grace</h3>
+                        <p class="text-gray-600">**Speaker:** Guest Speaker</p>
+                        <p class="text-gray-600">**Date:** September 1, 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministries Section -->
+    <section class="py-16 md:py-24 bg-gray-50" id="ministries">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">Our Ministries</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <i class="fas fa-users text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Youth Ministry</h3>
+                    <p class="text-gray-600">A place for young people to connect, grow in their faith, and have fun.</p>
+                    <button class="mt-4 px-4 py-2 text-sm rounded-full btn-primary font-medium learn-more-btn" data-ministry="Youth Ministry">Learn More</button>
+                </div>
+                <div class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <i class="fas fa-female text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Women's Ministry</h3>
+                    <p class="text-gray-600">A community for women to support each other through fellowship and Bible study.</p>
+                    <button class="mt-4 px-4 py-2 text-sm rounded-full btn-primary font-medium learn-more-btn" data-ministry="Women's Ministry">Learn More</button>
+                </div>
+                <div class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <i class="fas fa-male text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Men's Ministry</h3>
+                    <p class="text-gray-600">A group for men to build strong relationships and be discipled as leaders.</p>
+                    <button class="mt-4 px-4 py-2 text-sm rounded-full btn-primary font-medium learn-more-btn" data-ministry="Men's Ministry">Learn More</button>
+                </div>
+                <div class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <i class="fas fa-music text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Music & Worship</h3>
+                    <p class="text-gray-600">The team that leads the congregation in praise and worship, glorifying God through song.</p>
+                    <button class="mt-4 px-4 py-2 text-sm rounded-full btn-primary font-medium learn-more-btn" data-ministry="Music & Worship">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Events Section (Calendar) -->
+    <section class="py-16 md:py-24 bg-white" id="events">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">Upcoming Events</h2>
+            <div class="bg-gray-100 p-8 rounded-2xl shadow-md max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <button id="prev-month" class="text-indigo-600 font-bold text-xl">&lt;</button>
+                    <h3 id="current-month-year" class="text-2xl font-bold">September 2025</h3>
+                    <button id="next-month" class="text-indigo-600 font-bold text-xl">&gt;</button>
+                </div>
+                <div class="grid grid-cols-7 text-center font-semibold text-gray-700 mb-2">
+                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                </div>
+                <div id="calendar-grid" class="grid grid-cols-7 gap-1">
+                    <!-- Calendar days will be generated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Give Section -->
+    <section class="py-16 md:py-24 bg-gray-50" id="give">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">Give to the Church</h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-600 mb-8">Giving is an act of worship and a way to partner with God in what He is doing through our church. Thank you for your generosity!</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center">
+                        <img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=GCash" alt="GCash logo" class="w-20 h-20 mb-4">
+                        <h3 class="text-xl font-semibold mb-2">GCash</h3>
+                        <p class="text-gray-700 text-sm font-semibold">Account Number:</p>
+                        <p class="text-gray-700">0917-XXX-XXXX</p>
+                        <p class="text-gray-700 text-sm font-semibold mt-2">Account Name:</p>
+                        <p class="text-gray-700">Grace and Truth Church</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center">
+                        <img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=Bank" alt="Bank Transfer icon" class="w-20 h-20 mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Bank Transfer</h3>
+                        <p class="text-gray-700 text-sm font-semibold">Bank:</p>
+                        <p class="text-gray-700">BDO Unibank</p>
+                        <p class="text-gray-700 text-sm font-semibold mt-2">Account Number:</p>
+                        <p class="text-gray-700">0012-3456-7890</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center">
+                        <img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=PayPal" alt="PayPal logo" class="w-20 h-20 mb-4">
+                        <h3 class="text-xl font-semibold mb-2">PayPal</h3>
+                        <a href="#" class="inline-block px-4 py-2 mt-2 rounded-full btn-primary font-medium text-sm">Give via PayPal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="py-16 md:py-24 bg-white" id="contact">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-heading">Contact Us</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-8 mb-8">
+                    <div class="bg-gray-100 p-8 rounded-2xl shadow-md flex-1 text-left">
+                        <h3 class="text-xl font-bold mb-4">Our Location</h3>
+                        <p class="text-gray-700 mb-4 font-medium">Grace and Truth Church</p>
+                        <p class="text-gray-600 mb-4">123 Faith Avenue, Brgy. [Barangay Name], Quezon City, Metro Manila, Philippines</p>
+                        <div class="aspect-video rounded-xl overflow-hidden">
+                            <!-- Google Maps Embed - Replace with your church's actual map -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.5034608310325!2d121.05063011485664!3d14.56847498981267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c8d9c228a6f9%3A0x334863f69b5e5a26!2sQuezon%20City%20Hall!5e0!3m2!1sen!2sph!4v1660146059639!5m2!1sen!2sph" class="w-full h-full" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 p-8 rounded-2xl shadow-md flex-1 text-left">
+                        <h3 class="text-xl font-bold mb-4">Get in Touch</h3>
+                        <div class="space-y-4 mb-8">
+                            <p class="text-gray-700"><span class="font-semibold">Phone:</span> (02) 123-4567</p>
+                            <p class="text-gray-700"><span class="font-semibold">Email:</span> info@graceandtruth.ph</p>
+                            <p class="text-gray-700"><span class="font-semibold">Facebook:</span> <a href="https://www.facebook.com/yourchurchpage" target="_blank" class="text-indigo-600 hover:underline">facebook.com/yourchurchpage</a></p>
+                        </div>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="contact-name" class="block font-medium text-gray-700">Name</label>
+                                <input type="text" id="contact-name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block font-medium text-gray-700">Email</label>
+                                <input type="email" id="contact-email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                            </div>
+                            <div>
+                                <label for="contact-subject" class="block font-medium text-gray-700">Subject</label>
+                                <input type="text" id="contact-subject" name="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                            </div>
+                            <div>
+                                <label for="contact-message" class="block font-medium text-gray-700">Message</label>
+                                <textarea id="contact-message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 rounded-full btn-primary font-bold">Send Message</button>
+                        </form>
+                        <div id="form-status" class="mt-4 hidden text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Grace and Truth Church</h3>
+                    <p class="text-gray-400">123 Faith Avenue, Brgy. [Barangay Name], Quezon City, Metro Manila, Philippines</p>
+                    <p class="text-gray-400 mt-2">info@graceandtruth.ph | (02) 123-4567</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="hover:underline text-gray-400">About Us</a></li>
+                        <li><a href="#sermons" class="hover:underline text-gray-400">Sermons</a></li>
+                        <li><a href="#ministries" class="hover:underline text-gray-400">Ministries</a></li>
+                        <li><a href="#events" class="hover:underline text-gray-400">Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Follow Us</h4>
+                    <a href="https://www.facebook.com/yourchurchpage" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400 border-t border-gray-700 pt-4">
+                &copy; 2025 Grace and Truth Church. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ministry Modal -->
+    <div id="ministry-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+            <div id="modal-body" class="text-gray-700"></div>
+            <button id="modal-close-btn" class="mt-6 px-6 py-3 rounded-full btn-primary font-bold">Close</button>
+        </div>
+    </div>
+    
+    <!-- Event Modal -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="event-modal-title" class="text-2xl font-bold mb-4"></h3>
+            <p id="event-modal-date" class="text-indigo-600 font-semibold mb-2"></p>
+            <p id="event-modal-location" class="text-gray-600 mb-4"></p>
+            <p id="event-modal-details" class="text-gray-700"></p>
+            <button id="event-modal-close-btn" class="mt-6 px-6 py-3 rounded-full btn-primary font-bold">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Data for ministries and events
+        const ministries = {
+            "Youth Ministry": "Our Youth Ministry, or 'kabataan' ministry, is a dynamic community for students from middle school through college. We gather every Saturday for Bible study, games, and fellowship. Our goal is to equip the next generation to be passionate followers of Jesus.",
+            "Women's Ministry": "Our Women's Ministry is a supportive and nurturing 'kumunidad' for women of all ages. We hold regular Bible studies, prayer meetings, and special events to encourage one another in our walks with Christ.",
+            "Men's Ministry": "The Men's Ministry provides a space for men to build genuine friendships and grow as spiritual leaders in their homes, workplaces, and communities. We meet for breakfast, sports, and focused discussions on how to live out a godly life.",
+            "Music & Worship": "The Music and Worship Ministry is a team of volunteers with a heart to lead the congregation into the presence of God through music. We believe worship is more than just singing; it's a way of life that glorifies God."
+        };
+
+        const events = {
+            '2025-09-12': {
+                title: 'Youth Ministry Friday Fellowship',
+                location: 'Church Fellowship Hall',
+                details: 'A night of games, worship, and a challenging message for our youth. Invite your friends!'
+            },
+            '2025-09-15': {
+                title: 'Women\'s Ministry Bible Study',
+                location: 'Zoom (online)',
+                details: 'Join us as we continue our study on the Book of James. All women are welcome!'
+            },
+            '2025-09-21': {
+                title: 'Community Outreach Program',
+                location: 'Brgy. San Jose Community Center',
+                details: 'We will be distributing food packs and school supplies to our neighbors in need. All volunteers are welcome!'
+            }
+        };
+
+        // DOM Elements
+        const navMenu = document.getElementById('nav-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+        const ministryModal = document.getElementById('ministry-modal');
+        const eventModal = document.getElementById('event-modal');
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+
+        // Navigation Menu Toggle
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.add('hidden');
+            });
+        });
+
+        // Ministry Modal Logic
+        document.querySelectorAll('.learn-more-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const ministryName = button.getAttribute('data-ministry');
+                document.getElementById('modal-title').textContent = ministryName;
+                document.getElementById('modal-body').textContent = ministries[ministryName];
+                ministryModal.style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.modal .close-btn, #modal-close-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                ministryModal.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == ministryModal) {
+                ministryModal.style.display = 'none';
+            }
+        });
+
+        // Contact Form Submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formStatus.classList.remove('hidden');
+            formStatus.classList.remove('text-red-500', 'text-green-500');
+            formStatus.textContent = 'Sending message...';
+            // Placeholder for form submission. In a real application, you would send this to a backend server.
+            setTimeout(() => {
+                formStatus.textContent = 'Thank you for your message! We will get back to you shortly.';
+                formStatus.classList.add('text-green-500');
+                contactForm.reset();
+            }, 2000);
+        });
+        
+        // Calendar Logic
+        const calendarGrid = document.getElementById('calendar-grid');
+        const currentMonthYear = document.getElementById('current-month-year');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+
+        let currentDate = new Date();
+        
+        const generateCalendar = (date) => {
+            calendarGrid.innerHTML = '';
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            currentMonthYear.textContent = date.toLocaleString('en-PH', { month: 'long', year: 'numeric' });
+
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Add empty days for the beginning of the month
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'p-3';
+                calendarGrid.appendChild(emptyDiv);
+            }
+
+            // Add days with event listeners
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'p-3 rounded-lg text-center cursor-pointer';
+                const dayDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                
+                if (events[dayDate]) {
+                    dayDiv.classList.add('bg-indigo-600', 'text-white', 'font-bold', 'shadow-md', 'hover:bg-indigo-700', 'transition-colors', 'duration-300');
+                    dayDiv.addEventListener('click', () => showEventDetails(dayDate));
+                } else {
+                    dayDiv.classList.add('bg-gray-200', 'hover:bg-gray-300', 'transition-colors', 'duration-300');
+                }
+                dayDiv.textContent = i;
+                calendarGrid.appendChild(dayDiv);
+            }
+        };
+
+        const showEventDetails = (date) => {
+            const event = events[date];
+            if (event) {
+                document.getElementById('event-modal-title').textContent = event.title;
+                document.getElementById('event-modal-date').textContent = new Date(date).toLocaleDateString('en-PH', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                document.getElementById('event-modal-location').textContent = `Location: ${event.location}`;
+                document.getElementById('event-modal-details').textContent = event.details;
+                eventModal.style.display = 'block';
+            }
+        };
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate);
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate);
+        });
+
+        document.querySelectorAll('#event-modal .close-btn, #event-modal-close-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                eventModal.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == eventModal) {
+                eventModal.style.display = 'none';
+            }
+        });
+
+        // Initial calendar generation
+        generateCalendar(currentDate);
+
+        // SEO and general functionality
+        // No additional JS needed for the specified SEO, as it's handled by meta tags and semantic HTML.
+    </script>
+</body>
+</html>
