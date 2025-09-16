@@ -23,7 +23,8 @@
       >
         <!-- LOGO + SITE NAME -->
         <a href="#home" class="flex items-center space-x-3">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/Logo-TLCC.jpg"
             alt="True Light Christian Centre Logo"
             class="h-14 w-14 rounded-full object-cover shadow-md"
@@ -59,24 +60,41 @@
         <!-- Navigation Links -->
         <div
           id="nav-menu"
-          class="hidden flex-col items-center text-center md:flex md:flex-row md:items-center 
-          md:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none"
+          class="hidden flex-col items-center text-center md:flex md:flex-row md:items-center md:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none"
         >
-          <a href="#home" class="block px-4 py-2 hover:text-indigo-600 text-center">Home</a>
-          <a href="#about" class="block px-4 py-2 hover:text-indigo-600 text-center"
+          <a
+            href="#home"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
             >About Us</a
           >
-          <a href="#sermons" class="block px-4 py-2 hover:text-indigo-600 text-center "
+          <a
+            href="#sermons"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
             >Sermons</a
           >
-          <a href="#ministries" class="block px-4 py-2 hover:text-indigo-600 text-center"
+          <a
+            href="#ministries"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
             >Ministries</a
           >
-          <a href="#events" class="block px-4 py-2 hover:text-indigo-600 text-center"
+          <a
+            href="#events"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
             >Events</a
           >
-          <a href="#give" class="block px-4 py-2 hover:text-indigo-600 text-center">Give</a>
-          <a href="#contact" class="block px-4 py-2 hover:text-indigo-600 text-center"
+          <a
+            href="#give"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
+            >Give</a
+          >
+          <a
+            href="#contact"
+            class="block px-4 py-2 hover:text-indigo-600 text-center"
             >Contact Us</a
           >
         </div>
@@ -107,32 +125,81 @@
     </section>
 
     <!-- Welcome & Service Times -->
-    <section class="py-16 md:py-24 bg-white" id="welcome-message">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Us in Worship</h2>
-        <p class="text-lg text-gray-600 mb-8">
-          We would love to have you join our Sunday service. Whether you're a
-          first-time visitor or a long-time member, you are family here.
-        </p>
-        <div
-          class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8"
-        >
+    <section
+      id="welcome-message"
+      class="relative py-20 md:py-28 bg-gradient-to-b from-indigo-50 to-white overflow-hidden"
+    >
+      <div class="container mx-auto px-6 text-center">
+        <!-- Decorative background glow -->
+        <div class="absolute inset-0 pointer-events-none">
           <div
-            class="bg-gray-100 p-8 rounded-2xl shadow-md w-full md:w-auto max-w-sm"
+            class="absolute -top-32 -right-32 w-96 h-96 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse"
+          ></div>
+          <div
+            class="absolute -bottom-32 -left-32 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse"
+          ></div>
+        </div>
+
+        <h2
+          class="relative text-4xl md:text-5xl font-extrabold text-indigo-800 mb-6"
+        >
+          Join Us in Worship
+        </h2>
+        <p class="relative max-w-2xl mx-auto text-lg text-gray-600 mb-12">
+          We’d love to welcome you this Sunday. Whether you’re visiting for the
+          first time or a long-time member, you’re family here.
+        </p>
+
+        <div
+          class="relative flex flex-col md:flex-row justify-center items-stretch gap-8"
+        >
+          <!-- Card 1 -->
+          <div
+            class="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full md:w-64"
           >
-            <h3 class="text-xl font-semibold text-yellow-600 mb-2">
+            <h3
+              class="text-xl font-semibold text-yellow-600 mb-2 group-hover:text-yellow-500 transition"
+            >
+              Sunday Devotion
+            </h3>
+            <p
+              class="text-5xl font-bold text-indigo-600 group-hover:scale-110 transition transform"
+            >
+              09:00 AM
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full md:w-64"
+          >
+            <h3
+              class="text-xl font-semibold text-yellow-600 mb-2 group-hover:text-yellow-500 transition"
+            >
               Sunday Worship Service
             </h3>
-            <p class="text-4xl font-bold text-indigo-600">9:00 AM</p>
+            <p
+              class="text-5xl font-bold text-indigo-600 group-hover:scale-110 transition transform"
+            >
+              10:00 AM
+            </p>
           </div>
+
+          <!-- Card 3 -->
           <div
-            class="bg-gray-100 p-8 rounded-2xl shadow-md w-full md:w-auto max-w-sm"
+            class="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full md:w-64"
           >
-            <h3 class="text-xl font-semibold text-yellow-600 mb-2">
+            <h3
+              class="text-xl font-semibold text-yellow-600 mb-2 group-hover:text-yellow-500 transition"
+            >
               Mid-week Bible Study
             </h3>
-            <p class="text-4xl font-bold text-indigo-600">7:00 PM</p>
-            <p class="text-sm text-gray-500">(Wednesday)</p>
+            <p
+              class="text-5xl font-bold text-indigo-600 group-hover:scale-110 transition transform"
+            >
+              7:00 PM
+            </p>
+            <p class="text-sm text-gray-500 mt-1">(Wednesday)</p>
           </div>
         </div>
       </div>
@@ -196,7 +263,8 @@
       >
         <!-- Worship Service -->
         <div class="relative inline-block rounded-xl overflow-hidden shadow-lg">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/491751816_1082989717203333_3365833106678562973_n.jpg"
             alt="Church worship service with congregation"
             class="block w-full h-auto"
@@ -211,7 +279,8 @@
 
         <!-- Fellowship -->
         <div class="relative inline-block rounded-xl overflow-hidden shadow-lg">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/fellow.jpg"
             alt="Church fellowship"
             class="block w-full h-auto"
@@ -225,7 +294,8 @@
 
         <!-- Community -->
         <div class="relative inline-block rounded-xl overflow-hidden shadow-lg">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/Community.jpg"
             alt="Community outreach"
             class="block w-full h-auto"
@@ -239,7 +309,8 @@
 
         <!-- Bible Study -->
         <div class="relative inline-block rounded-xl overflow-hidden shadow-lg">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/Bible.jpg"
             alt="Bible study"
             class="block w-full h-auto"
@@ -253,7 +324,8 @@
 
         <!-- Baptism -->
         <div class="relative inline-block rounded-xl overflow-hidden shadow-lg">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/Baptism.jpg"
             alt="Baptism"
             class="block w-full h-auto"
@@ -267,7 +339,8 @@
 
         <!-- Youth Group -->
         <div class="relative inline-block rounded-xl overflow-hidden shadow-lg">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="img/Youth.jpg"
             alt="Youth group"
             class="block w-full h-auto"
@@ -325,7 +398,8 @@
           <div class="text-center">
             <h4 class="text-2xl font-bold mb-4">Meet Our Pastor</h4>
             <div class="inline-block bg-white p-6 rounded-2xl shadow-md">
-              <img loading="lazy"
+              <img
+                loading="lazy"
                 src="img/Pastor Mark.jpg"
                 alt="Pastor's photo"
                 class="rounded-full mx-auto mb-4 w-32 h-32 md:w-48 md:h-48 object-cover"
@@ -388,7 +462,8 @@
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   class="w-full aspect-video rounded-xl mb-4 object-cover"
                   src="https://img.youtube.com/vi/h9rGHcTtLCc/hqdefault.jpg"
                   alt="The Good Shepherd"
@@ -405,7 +480,8 @@
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   class="w-full aspect-video rounded-xl mb-4 object-cover"
                   src="https://img.youtube.com/vi/BmxOGTQ4tag/hqdefault.jpg"
                   alt="Grace Upon Grace"
@@ -420,10 +496,14 @@
 
         <!-- YouTube Videos Section -->
         <div class="mt-12">
-          <h3 class="text-2xl font-bold mb-6 text-center">Latest Sermons from YouTube</h3>
+          <h3 class="text-2xl font-bold mb-6 text-center">
+            Latest Sermons from YouTube
+          </h3>
           <div class="flex justify-center items-center space-x-4 mb-8">
             <div class="flex items-center space-x-2">
-              <label for="youtube-speaker-select" class="text-gray-600">Speaker:</label>
+              <label for="youtube-speaker-select" class="text-gray-600"
+                >Speaker:</label
+              >
               <select
                 id="youtube-speaker-select"
                 class="rounded-md border-gray-300 shadow-sm p-2"
@@ -434,7 +514,9 @@
               </select>
             </div>
             <div class="flex items-center space-x-2">
-              <label for="youtube-sort-select" class="text-gray-600">Sort by:</label>
+              <label for="youtube-sort-select" class="text-gray-600"
+                >Sort by:</label
+              >
               <select
                 id="youtube-sort-select"
                 class="rounded-md border-gray-300 shadow-sm p-2"
@@ -446,13 +528,27 @@
               </select>
             </div>
           </div>
-          <div id="youtube-videos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            id="youtube-videos"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             <!-- Videos will be loaded here -->
           </div>
           <div class="flex justify-center items-center space-x-4 mt-8">
-            <button id="prev-page-btn" class="px-4 py-2 bg-gray-300 text-gray-600 rounded-md disabled:opacity-50" disabled>Previous</button>
+            <button
+              id="prev-page-btn"
+              class="px-4 py-2 bg-gray-300 text-gray-600 rounded-md disabled:opacity-50"
+              disabled
+            >
+              Previous
+            </button>
             <span id="page-info" class="text-gray-600">Page 1</span>
-            <button id="next-page-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Next</button>
+            <button
+              id="next-page-btn"
+              class="px-4 py-2 bg-indigo-600 text-white rounded-md"
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>
@@ -591,7 +687,8 @@
             <div
               class="p-6 rounded-2xl shadow-md flex flex-col items-center bg-blue-950 text-white"
             >
-              <img loading="lazy"
+              <img
+                loading="lazy"
                 src="img/Gcash.jpeg"
                 alt="GCash logo"
                 class="w-20 h-20 mb-4"
@@ -605,7 +702,8 @@
             <div
               class="bg-blue-950 p-6 rounded-2xl shadow-md flex flex-col items-center text-white"
             >
-              <img loading="lazy"
+              <img
+                loading="lazy"
                 src="img/BDO.png"
                 alt="Bank Transfer icon"
                 class="w-20 h-20 mb-4"
@@ -623,7 +721,8 @@
             <div
               class="bg-blue-950 p-6 rounded-2xl shadow-md flex flex-col items-center"
             >
-              <img loading="lazy"
+              <img
+                loading="lazy"
                 src="img/Paypal.jpeg"
                 alt="PayPal logo"
                 class="w-20 h-20 mb-4"
