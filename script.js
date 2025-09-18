@@ -204,8 +204,9 @@ window.addEventListener("click", (event) => {
 
 
 // YouTube API Integration//'API-KEY';
-const apiKey = 'AIzaSyC3YYpMeyTIp-RESlrPYpbqijfW6asRWME'; // Replace with your actual API key
-const channelId = 'UCBbABuoqT0g8lwbg7gpMCpw'; // Replace with your actual channel ID
+const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
+
 const maxResults = 6; // number of videos to show per page
 
 let currentPage = 1;
