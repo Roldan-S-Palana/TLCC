@@ -203,8 +203,8 @@ window.addEventListener("click", (event) => {
 });
 
 
-// YouTube API Integration
-const apiKey = 'API-KEY';//'AIzaSyC3YYpMeyTIp-RESlrPYpbqijfW6asRWME'; // Replace with your actual API key
+// YouTube API Integration//'API-KEY';
+const apiKey = 'AIzaSyC3YYpMeyTIp-RESlrPYpbqijfW6asRWME'; // Replace with your actual API key
 const channelId = 'UCBbABuoqT0g8lwbg7gpMCpw'; // Replace with your actual channel ID
 const maxResults = 6; // number of videos to show per page
 
