@@ -57,8 +57,10 @@ document.querySelectorAll(".learn-more-btn").forEach((button) => {
   button.addEventListener("click", () => {
     const ministryName = button.getAttribute("data-ministry");
     if (ministryName && ministries[ministryName]) {
-      document.getElementById("modal-title").textContent = ministryName;
-      document.getElementById("modal-body").textContent = ministries[ministryName];
+      const modalTitle = document.getElementById("modal-title");
+      const modalBody = document.getElementById("modal-body");
+      if (modalTitle) modalTitle.textContent = ministryName;
+      if (modalBody) modalBody.textContent = ministries[ministryName];
       if (ministryModal) ministryModal.style.display = "block";
     }
   });
@@ -164,15 +166,19 @@ function renderCalendar() {
 function showEventDetails(dateKey) {
   const event = events[dateKey];
   if (event && eventModal) {
-    document.getElementById("event-modal-title").textContent = event.title;
-    document.getElementById("event-modal-date").textContent = new Date(dateKey).toLocaleDateString("en-PH", {
+    const eventModalTitle = document.getElementById("event-modal-title");
+    const eventModalDate = document.getElementById("event-modal-date");
+    const eventModalLocation = document.getElementById("event-modal-location");
+    const eventModalDetails = document.getElementById("event-modal-details");
+    if (eventModalTitle) eventModalTitle.textContent = event.title;
+    if (eventModalDate) eventModalDate.textContent = new Date(dateKey).toLocaleDateString("en-PH", {
       weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
     });
-    document.getElementById("event-modal-location").textContent = `Location: ${event.location}`;
-    document.getElementById("event-modal-details").textContent = event.details;
+    if (eventModalLocation) eventModalLocation.textContent = `Location: ${event.location}`;
+    if (eventModalDetails) eventModalDetails.textContent = event.details;
     eventModal.style.display = "block";
   }
 }
@@ -202,6 +208,8 @@ window.addEventListener("click", (event) => {
   }
 });
 
+
+const CACHE_TIME = 10 * 60 * 1000; // 10 minutes
 
 // YouTube API Integration//'API-KEY';
 const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -244,6 +252,86 @@ function extractSpeaker(title) {
   return "Unknown Speaker";
 }
 
+function processAndDisplayData(data, speaker) {
+  const container = document.getElementById('youtube-videos');
+  const prevBtn = document.getElementById('prev-page-btn');
+  const nextBtn = document.getElementById('next-page-btn');
+  const pageInfo = document.getElementById('page-info');
+
+  container.innerHTML = ''; // Clear loading message
+  nextPageToken = data.nextPageToken || null;
+  prevPageToken = data.prevPageToken || null;
+
+  // Extract speakers
+  data.items.forEach(item => {
+    item.speaker = extractSpeaker(item.snippet.title);
+  });
+
+  // Collect unique speakers
+  const uniqueSpeakers = new Set();
+  data.items.forEach(item => {
+    uniqueSpeakers.add(item.speaker);
+  });
+
+  // Update dropdown
+  const youtubeSpeakerSelect = document.getElementById('youtube-speaker-select');
+  if (youtubeSpeakerSelect) {
+    youtubeSpeakerSelect.innerHTML = '<option value="all">All Speakers</option><option value="pastor-name">Prophet Mark Makoyawo</option><option value="guest-speaker">Guest Speaker</option>';
+    Array.from(uniqueSpeakers).sort().forEach(s => {
+      if (s !== 'Prophet Mark Makoyawo' && s !== 'Unknown Speaker') {
+        youtubeSpeakerSelect.innerHTML += `<option value="${s}">${s}</option>`;
+      }
+    });
+  }
+
+  // Sort videos to prioritize Prophet Mark Makoyawo
+  data.items.sort((a, b) => {
+    const aIsPastor = a.speaker === 'Prophet Mark Makoyawo';
+    const bIsPastor = b.speaker === 'Prophet Mark Makoyawo';
+    if (aIsPastor && !bIsPastor) return -1;
+    if (!aIsPastor && bIsPastor) return 1;
+    return 0;
+  });
+
+  // Filter videos by speaker
+  if (speaker !== 'all') {
+    data.items = data.items.filter(item => videoMatchesSpeaker(item, speaker));
+  }
+
+  // Update page info
+  if (pageInfo) {
+    pageInfo.textContent = `Page ${currentPage}`;
+  }
+
+  // Update button states
+  if (prevBtn) prevBtn.disabled = !prevPageToken;
+  if (nextBtn) nextBtn.disabled = !nextPageToken;
+
+  if (data.items && data.items.length > 0) {
+    data.items.forEach(item => {
+      if (item.id.kind === "youtube#video") {
+        const videoId = item.id.videoId;
+        const speakerName = item.speaker;
+        const publishedDate = new Date(item.snippet.publishedAt);
+        const formattedDate = publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card bg-white p-4 rounded-2xl shadow-md';
+        videoCard.innerHTML = `
+          <div class="aspect-video mb-4">
+            <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen class="w-full h-full rounded-xl"></iframe>
+          </div>
+          <h4 class="text-lg font-semibold mb-2">${item.snippet.title}</h4>
+          <p class="text-gray-600 text-sm">Speaker: ${speakerName}</p>
+          <p class="text-gray-600 text-sm">Date: ${formattedDate}</p>
+        `;
+        container.appendChild(videoCard);
+      }
+    });
+  } else {
+    container.innerHTML = '<p class="text-center text-gray-600 col-span-full">No videos found.</p>';
+  }
+}
+
 function videoMatchesSpeaker(video, speaker) {
   if (speaker === 'all') return true;
   if (speaker === 'pastor-name') return video.speaker === 'Prophet Mark Makoyawo';
@@ -259,115 +347,56 @@ function loadYouTubeVideos(order = 'date', pageToken = null, speaker = 'all') {
 
   if (!container) return;
 
-  // Show loading message
-  container.innerHTML = '<p class="text-center text-gray-600 col-span-full">Loading videos...</p>';
-
-  // Disable buttons during loading
-  if (prevBtn) prevBtn.disabled = true;
-  if (nextBtn) nextBtn.disabled = true;
-
   let url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=${order}&maxResults=${maxResults}`;
   if (pageToken) {
     url += `&pageToken=${pageToken}`;
   }
 
-  fetch(url)
-    .then(res => {
-      if (!res.ok) {
-        if (res.status === 403) {
-          throw new Error('YouTube API key is invalid or expired. Please check your API key.');
+  const cacheKey = `ytCache_${order}_${pageToken || 'null'}_${speaker}`;
+  const cached = JSON.parse(localStorage.getItem(cacheKey));
+
+  if (cached && (Date.now() - cached.timestamp < CACHE_TIME)) {
+    // Use cached data
+    processAndDisplayData(cached.data, speaker);
+  } else {
+    // Show loading message
+    container.innerHTML = '<p class="text-center text-gray-600 col-span-full">Loading videos...</p>';
+
+    // Disable buttons during loading
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+
+    fetch(url)
+      .then(res => {
+        if (!res.ok) {
+          if (res.status === 403) {
+            throw new Error('YouTube API key is invalid or expired. Please check your API key.');
+          }
+          throw new Error(`HTTP error! status: ${res.status}`);
         }
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json();
-    })
-    .then(data => {
-      container.innerHTML = ''; // Clear loading message
-      nextPageToken = data.nextPageToken || null;
-      prevPageToken = data.prevPageToken || null;
+        return res.json();
+      })
+      .then(data => {
+        // Cache the data
+        localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
 
-      // Extract speakers
-      data.items.forEach(item => {
-        item.speaker = extractSpeaker(item.snippet.title);
+        // Process and display
+        processAndDisplayData(data, speaker);
+      })
+      .catch(err => {
+        console.error('Error fetching YouTube videos:', err);
+        container.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load videos. Please try again later.</p>';
+        // Re-enable buttons on error
+        if (prevBtn) prevBtn.disabled = false;
+        if (nextBtn) nextBtn.disabled = false;
       });
-
-      // Collect unique speakers
-      const uniqueSpeakers = new Set();
-      data.items.forEach(item => {
-        uniqueSpeakers.add(item.speaker);
-      });
-
-      // Update dropdown
-      const speakerSelect = document.getElementById('youtube-speaker-select');
-      if (speakerSelect) {
-        speakerSelect.innerHTML = '<option value="all">All Speakers</option><option value="pastor-name">Prophet Mark Makoyawo</option><option value="guest-speaker">Guest Speaker</option>';
-        Array.from(uniqueSpeakers).sort().forEach(s => {
-          if (s !== 'Prophet Mark Makoyawo' && s !== 'Unknown Speaker') {
-            speakerSelect.innerHTML += `<option value="${s}">${s}</option>`;
-          }
-        });
-      }
-
-      // Sort videos to prioritize Prophet Mark Makoyawo
-      data.items.sort((a, b) => {
-        const aIsPastor = a.speaker === 'Prophet Mark Makoyawo';
-        const bIsPastor = b.speaker === 'Prophet Mark Makoyawo';
-        if (aIsPastor && !bIsPastor) return -1;
-        if (!aIsPastor && bIsPastor) return 1;
-        return 0;
-      });
-
-      // Filter videos by speaker
-      if (speaker !== 'all') {
-        data.items = data.items.filter(item => videoMatchesSpeaker(item, speaker));
-      }
-
-      // Update page info
-      if (pageInfo) {
-        pageInfo.textContent = `Page ${currentPage}`;
-      }
-
-      // Update button states
-      if (prevBtn) prevBtn.disabled = !prevPageToken;
-      if (nextBtn) nextBtn.disabled = !nextPageToken;
-
-      if (data.items && data.items.length > 0) {
-        data.items.forEach(item => {
-          if (item.id.kind === "youtube#video") {
-            const videoId = item.id.videoId;
-            const speaker = item.speaker;
-            const publishedDate = new Date(item.snippet.publishedAt);
-            const formattedDate = publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            const videoCard = document.createElement('div');
-            videoCard.className = 'video-card bg-white p-4 rounded-2xl shadow-md';
-            videoCard.innerHTML = `
-              <div class="aspect-video mb-4">
-                <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen class="w-full h-full rounded-xl"></iframe>
-              </div>
-              <h4 class="text-lg font-semibold mb-2">${item.snippet.title}</h4>
-              <p class="text-gray-600 text-sm">Speaker: ${speaker}</p>
-              <p class="text-gray-600 text-sm">Date: ${formattedDate}</p>
-            `;
-            container.appendChild(videoCard);
-          }
-        });
-      } else {
-        container.innerHTML = '<p class="text-center text-gray-600 col-span-full">No videos found.</p>';
-      }
-    })
-    .catch(err => {
-      console.error('Error fetching YouTube videos:', err);
-      container.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load videos. Please try again later.</p>';
-      // Re-enable buttons on error
-      if (prevBtn) prevBtn.disabled = false;
-      if (nextBtn) nextBtn.disabled = false;
-    });
+  }
 }
 
 // Event listeners for sorting and pagination
 document.addEventListener('DOMContentLoaded', () => {
   const sortSelect = document.getElementById('youtube-sort-select');
-  const speakerSelect = document.getElementById('youtube-speaker-select');
+  const youtubeSpeakerSelect = document.getElementById('youtube-speaker-select');
   const prevBtn = document.getElementById('prev-page-btn');
   const nextBtn = document.getElementById('next-page-btn');
 
@@ -386,9 +415,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Speaker change handler
-  if (speakerSelect) {
-    speakerSelect.addEventListener('change', () => {
-      currentSpeaker = speakerSelect.value;
+  if (youtubeSpeakerSelect) {
+    youtubeSpeakerSelect.addEventListener('change', () => {
+      currentSpeaker = youtubeSpeakerSelect.value;
       currentPage = 1;
       nextPageToken = null;
       prevPageToken = null;
@@ -418,14 +447,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Sermon Filtering for Static List
-const speakerSelect = document.getElementById('speaker-select');
+const sermonSpeakerSelect = document.getElementById('speaker-select');
 const sortSelect = document.getElementById('sort-select');
 const sermonList = document.getElementById('sermon-list');
 
 function filterSermons() {
   if (!sermonList) return;
 
-  const selectedSpeaker = speakerSelect ? speakerSelect.value : 'all';
+  const selectedSpeaker = sermonSpeakerSelect ? sermonSpeakerSelect.value : 'all';
   const selectedSort = sortSelect ? sortSelect.value : 'date-desc';
 
   const sermons = sermonList.querySelectorAll('.bg-gray-100');
@@ -470,8 +499,8 @@ function filterSermons() {
 }
 
 // Add event listeners
-if (speakerSelect) {
-  speakerSelect.addEventListener('change', filterSermons);
+if (sermonSpeakerSelect) {
+  sermonSpeakerSelect.addEventListener('change', filterSermons);
 }
 if (sortSelect) {
   sortSelect.addEventListener('change', filterSermons);
@@ -482,3 +511,5 @@ filterSermons();
 
 // Initial render
 renderCalendar();
+
+console.log(import.meta.env.VITE_YOUTUBE_API_KEY);
