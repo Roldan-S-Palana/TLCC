@@ -228,10 +228,10 @@ function extractSpeaker(title) {
   const byMatch = cleanTitle.match(/\bby\s+([^\-|:]+)/i);
   if (byMatch) {
     const candidate = byMatch[1].trim();
-    if (candidate.toLowerCase().includes('makoyawo') || candidate.toLowerCase().includes('mark')) {
+    if (candidate.toLowerCase().includes('makoyawo') || candidate.toLowerCase().includes('mark') || candidate.toLowerCase().includes('prophet')) {
       return 'Prophet Mark Makoyawo';
     }
-    return candidate;
+    return 'Guest Speaker';
   }
 
   // 2. Look for ": NAME" or "| NAME"
@@ -239,15 +239,15 @@ function extractSpeaker(title) {
   if (colonMatch) {
     const candidate = colonMatch[1].trim();
     if (candidate.split(' ').length <= 5 && candidate.length > 2) {
-      if (candidate.toLowerCase().includes('makoyawo') || candidate.toLowerCase().includes('mark')) {
+      if (candidate.toLowerCase().includes('makoyawo') || candidate.toLowerCase().includes('mark') || candidate.toLowerCase().includes('prophet')) {
         return 'Prophet Mark Makoyawo';
       }
-      return candidate;
+      return 'Guest Speaker';
     }
   }
 
-  // 3. Fallback: Unknown
-  return "Unknown Speaker";
+  // 3. Fallback: Guest Speaker
+  return "Guest Speaker";
 }
 
 function processAndDisplayData(data, speaker) {
@@ -271,15 +271,22 @@ function processAndDisplayData(data, speaker) {
     uniqueSpeakers.add(item.speaker);
   });
 
-  // Update dropdown
+  // Update dropdown only if speakers have changed
   const youtubeSpeakerSelect = document.getElementById('youtube-speaker-select');
   if (youtubeSpeakerSelect) {
-    youtubeSpeakerSelect.innerHTML = '<option value="all">All Speakers</option><option value="pastor-name">Prophet Mark Makoyawo</option><option value="guest-speaker">Guest Speaker</option>';
-    Array.from(uniqueSpeakers).sort().forEach(s => {
-      if (s !== 'Prophet Mark Makoyawo' && s !== 'Unknown Speaker') {
-        youtubeSpeakerSelect.innerHTML += `<option value="${s}">${s}</option>`;
-      }
-    });
+    const currentOptions = Array.from(youtubeSpeakerSelect.options).map(opt => opt.value).sort();
+    const newOptions = ['all', 'pastor-name', 'guest-speaker', ...Array.from(uniqueSpeakers).filter(s => s !== 'Prophet Mark Makoyawo' && s !== 'Unknown Speaker' && s !== 'Guest Speaker').sort()];
+
+    if (JSON.stringify(currentOptions) !== JSON.stringify(newOptions)) {
+      youtubeSpeakerSelect.innerHTML = '<option value="all">All Speakers</option><option value="pastor-name">Prophet Mark Makoyawo</option><option value="guest-speaker">Guest Speaker</option>';
+      Array.from(uniqueSpeakers).sort().forEach(s => {
+        if (s !== 'Prophet Mark Makoyawo' && s !== 'Unknown Speaker' && s !== 'Guest Speaker') {
+          youtubeSpeakerSelect.innerHTML += `<option value="${s}">${s}</option>`;
+        }
+      });
+    }
+    // Set the selected value to preserve the current selection
+    youtubeSpeakerSelect.value = currentSpeaker;
   }
 
   // Sort videos to prioritize Prophet Mark Makoyawo
