@@ -211,9 +211,9 @@ window.addEventListener("click", (event) => {
 
 const CACHE_TIME = 10 * 60 * 1000; // 10 minutes
 
-// YouTube API Integration//'API-KEY';
-const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
+// YouTube API Integration
+const apiKey = 'AIzaSyCLOvaWjJTtAQ_RKicZYW2og9MDAtUkKy8';
+const channelId = 'UCBbABuoqT0g8lwbg7gpMCpw';
 
 const maxResults = 6; // number of videos to show per page
 
@@ -512,4 +512,5 @@ filterSermons();
 // Initial render
 renderCalendar();
 
-console.log(import.meta.env.VITE_YOUTUBE_API_KEY);
+// YouTube API key loaded
+console.log('YouTube API key loaded');
