@@ -211,9 +211,7 @@ window.addEventListener("click", (event) => {
 
 const CACHE_TIME = 10 * 60 * 1000; // 10 minutes
 
-// YouTube API Integration
-const apiKey = 'AIzaSyCLOvaWjJTtAQ_RKicZYW2og9MDAtUkKy8';
-const channelId = 'UCBbABuoqT0g8lwbg7gpMCpw';
+// YouTube API Integration via proxy
 
 const maxResults = 6; // number of videos to show per page
 
@@ -347,7 +345,7 @@ function loadYouTubeVideos(order = 'date', pageToken = null, speaker = 'all') {
 
   if (!container) return;
 
-  let url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=${order}&maxResults=${maxResults}`;
+  let url = `/api/videos?order=${order}&maxResults=${maxResults}&speaker=${speaker}`;
   if (pageToken) {
     url += `&pageToken=${pageToken}`;
   }
@@ -369,9 +367,6 @@ function loadYouTubeVideos(order = 'date', pageToken = null, speaker = 'all') {
     fetch(url)
       .then(res => {
         if (!res.ok) {
-          if (res.status === 403) {
-            throw new Error('YouTube API key is invalid or expired. Please check your API key.');
-          }
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.json();
