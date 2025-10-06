@@ -157,7 +157,7 @@ function renderCalendar() {
   for (let d = 1; d <= daysInMonth; d++) {
     const dayCell = document.createElement("div");
     dayCell.textContent = d;
-    dayCell.className = "p-2 bg-white rounded hover:bg-indigo-100 cursor-pointer";
+    dayCell.className = "p-2 bg-white dark:bg-gray-700 dark:text-white rounded hover:bg-indigo-100 dark:hover:bg-indigo-900 cursor-pointer";
     dayCell.addEventListener("click", () => showEventDetails(`${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`));
     calendarGrid.appendChild(dayCell);
   }
@@ -320,14 +320,14 @@ function processAndDisplayData(data, speaker) {
         const publishedDate = new Date(item.snippet.publishedAt);
         const formattedDate = publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         const videoCard = document.createElement('div');
-        videoCard.className = 'video-card bg-white p-4 rounded-2xl shadow-md';
+        videoCard.className = 'video-card bg-white dark:bg-gray-700 p-4 rounded-2xl shadow-md';
         videoCard.innerHTML = `
           <div class="aspect-video mb-4">
             <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen class="w-full h-full rounded-xl"></iframe>
           </div>
           <h4 class="text-lg font-semibold mb-2">${item.snippet.title}</h4>
-          <p class="text-gray-600 text-sm">Speaker: ${speakerName}</p>
-          <p class="text-gray-600 text-sm">Date: ${formattedDate}</p>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">Speaker: ${speakerName}</p>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">Date: ${formattedDate}</p>
         `;
         container.appendChild(videoCard);
       }
@@ -553,10 +553,13 @@ const sunIcon = document.getElementById('sun-icon');
 const moonIcon = document.getElementById('moon-icon');
 
 // Check for saved theme preference or default to light mode
-const savedTheme = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+let savedTheme = localStorage.getItem('theme');
+if (!savedTheme) {
+  localStorage.setItem('theme', 'light');
+  savedTheme = 'light';
+}
 
-if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+if (savedTheme === 'dark') {
   document.documentElement.classList.add('dark');
   if (moonIcon) moonIcon.classList.add('hidden');
   if (sunIcon) sunIcon.classList.remove('hidden');
@@ -591,19 +594,19 @@ if (themeToggle) {
   themeToggle.addEventListener('click', toggleTheme);
 }
 
-// Listen for system theme changes
+// Listen for system theme changes - only apply if theme is explicitly saved
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-  if (!localStorage.getItem('theme')) {
-    if (e.matches) {
-      document.documentElement.classList.add('dark');
-      if (moonIcon) moonIcon.classList.add('hidden');
-      if (sunIcon) sunIcon.classList.remove('hidden');
-    } else {
-      document.documentElement.classList.remove('dark');
-      if (sunIcon) sunIcon.classList.add('hidden');
-      if (moonIcon) moonIcon.classList.remove('hidden');
-    }
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    if (moonIcon) moonIcon.classList.add('hidden');
+    if (sunIcon) sunIcon.classList.remove('hidden');
+  } else if (savedTheme === 'light') {
+    document.documentElement.classList.remove('dark');
+    if (sunIcon) sunIcon.classList.add('hidden');
+    if (moonIcon) moonIcon.classList.remove('hidden');
   }
+  // If no theme saved, stay in default light mode
 });
 // Scroll-triggered animations
 const observerOptions = {

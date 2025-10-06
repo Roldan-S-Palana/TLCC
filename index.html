@@ -41,10 +41,10 @@
   <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <!-- Navigation Header -->
     <header
-      class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 transition-colors duration-300"
+      class="bg-blue-500 dark:bg-slate-800 shadow-sm sticky top-0 z-50 transition-colors duration-300"
     >
       <nav
-        class="flex items-center justify-between px-4 py-3 md:py-4 bg-white dark:bg-gray-800 md:bg-transparent md:dark:bg-transparent min-h-[60px] md:min-h-[64px]"
+        class="flex items-center justify-between px-4 py-3 md:py-4 min-h-[60px] md:min-h-[64px]"
       >
         <!-- LOGO + SITE NAME -->
         <a
@@ -58,7 +58,7 @@
             class="h-12 w-12 md:h-14 md:w-14 rounded-full object-cover shadow-md"
             loading="lazy"
           />
-          <span class="text-2xl font-bold text-gray-800 dark:text-white">
+          <span class="text-2xl font-bold text-white">
             True Light Christian Centre
           </span>
         </a>
@@ -66,7 +66,7 @@
         <!-- Dark Mode Toggle -->
         <button
           id="theme-toggle"
-          class="p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
+          class="p-2 rounded-lg text-white hover:text-gray-200 hover:bg-white/20 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
           aria-label="Toggle dark mode"
         >
           <!-- Sun icon -->
@@ -98,7 +98,7 @@
         <!-- Hamburger Button (Mobile) -->
         <button
           id="menu-toggle"
-          class="md:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-100 focus:outline-none"
+          class="md:hidden text-white hover:text-gray-200 dark:text-gray-400 dark:hover:text-gray-100 focus:outline-none"
           aria-label="Toggle navigation menu"
         >
           <svg
@@ -120,43 +120,15 @@
         <!-- Navigation Links -->
         <div
           id="nav-menu"
-          class="hidden flex-col items-center justify-center text-center md:flex md:flex-row md:items-center md:space-x-4 lg:space-x-6 xl:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white dark:bg-gray-800 md:bg-transparent md:dark:bg-transparent shadow-md md:shadow-none py-4 md:py-0"
+          class="hidden flex-col items-center justify-center text-center md:flex md:flex-row md:items-center md:space-x-6 absolute md:static top-full left-0 w-full md:w-auto bg-blue-500 dark:bg-slate-800 md:bg-transparent md:dark:bg-transparent shadow-md md:shadow-none py-4 md:py-0"
         >
-          <a
-            href="#home"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >Home</a
-          >
-          <a
-            href="#about"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >About Us</a
-          >
-          <a
-            href="#sermons"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >Sermons</a
-          >
-          <a
-            href="#ministries"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >Ministries</a
-          >
-          <a
-            href="#events"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >Events</a
-          >
-          <a
-            href="#give"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >Give</a
-          >
-          <a
-            href="#contact"
-            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 md:w-auto md:py-2 md:hover:bg-transparent md:dark:hover:bg-transparent"
-            >Contact Us</a
-          >
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#about" class="nav-link">About Us</a>
+          <a href="#sermons" class="nav-link">Sermons</a>
+          <a href="#ministries" class="nav-link">Ministries</a>
+          <a href="#events" class="nav-link">Events</a>
+          <a href="#give" class="nav-link">Give</a>
+          <a href="#contact" class="nav-link">Contact Us</a>
         </div>
       </nav>
     </header>
@@ -191,7 +163,7 @@
     <!-- Welcome & Service Times -->
     <section
       id="welcome-message"
-      class="relative py-20 md:py-28 bg-gradient-to-b from-indigo-50 to-white overflow-hidden"
+      class="relative py-20 md:py-28 bg-gradient-to-b from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 overflow-hidden"
     >
       <div class="container mx-auto px-6 text-center">
         <!-- Decorative background glow -->
@@ -205,11 +177,11 @@
         </div>
 
         <h2
-          class="relative text-4xl md:text-5xl font-extrabold text-indigo-800 mb-6"
+          class="relative text-4xl md:text-5xl font-extrabold text-indigo-800 dark:text-white mb-6"
         >
           Join Us in Worship
         </h2>
-        <p class="relative max-w-2xl mx-auto text-lg text-gray-600 mb-12">
+        <p class="relative max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">
           We’d love to welcome you this Sunday. Whether you’re visiting for the
           first time or a long-time member, you’re family here.
         </p>
@@ -219,7 +191,7 @@
         >
           <!-- Card 1 -->
           <div
-            class="group bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full sm:w-80 md:w-64 lg:w-72"
+            class="group bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full sm:w-80 md:w-64 lg:w-72"
           >
             <h3
               class="text-xl font-semibold text-yellow-600 mb-2 group-hover:text-yellow-500 transition"
@@ -227,7 +199,7 @@
               Sunday Devotion
             </h3>
             <p
-              class="text-5xl font-bold text-indigo-600 group-hover:scale-110 transition transform"
+              class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition transform"
             >
               09:00 AM
             </p>
@@ -235,7 +207,7 @@
 
           <!-- Card 2 -->
           <div
-            class="group bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full sm:w-80 md:w-64 lg:w-72"
+            class="group bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full sm:w-80 md:w-64 lg:w-72"
           >
             <h3
               class="text-xl font-semibold text-yellow-600 mb-2 group-hover:text-yellow-500 transition"
@@ -243,7 +215,7 @@
               Sunday Worship Service
             </h3>
             <p
-              class="text-5xl font-bold text-indigo-600 group-hover:scale-110 transition transform"
+              class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition transform"
             >
               10:00 AM
             </p>
@@ -251,7 +223,7 @@
 
           <!-- Card 3 -->
           <div
-            class="group bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full sm:w-80 md:w-64 lg:w-72"
+            class="group bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 w-full sm:w-80 md:w-64 lg:w-72"
           >
             <h3
               class="text-xl font-semibold text-yellow-600 mb-2 group-hover:text-yellow-500 transition"
@@ -259,11 +231,11 @@
               Mid-week Bible Study
             </h3>
             <p
-              class="text-5xl font-bold text-indigo-600 group-hover:scale-110 transition transform"
+              class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition transform"
             >
               7:00 PM
             </p>
-            <p class="text-sm text-gray-500 mt-1">(Wednesday)</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">(Wednesday)</p>
           </div>
         </div>
       </div>
@@ -451,7 +423,7 @@
     </section>
 
     <!-- Image Gallery Carousel -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-800">
       <div class="container mx-auto px-4">
         <h2
           class="text-3xl md:text-4xl font-bold text-center mb-8 section-heading"
@@ -652,28 +624,28 @@
     </section>
 
     <!-- About Us Section -->
-    <section class="py-16 md:py-24 bg-gray-50" id="about">
+    <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-800" id="about">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl md:text-4xl font-bold section-heading">About Us</h2>
         <div class="max-w-4xl mx-auto">
-          <h3 class="text-2xl font-bold text-gray-800 mb-4">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
             Our Story: A Family of Faith
           </h3>
-          <p class="text-lg text-gray-600 mb-8">
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
             True Light Christian Centre was founded in 20XX with a simple desire
             to be a light in our local community. From a small Bible study
             group, we have grown into a loving church where every person is
             embraced as family. Our journey is a testament to God's faithfulness
             and the beautiful community spirit of our people.
           </p>
-          <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
+          <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg mb-8">
             <h4 class="text-xl font-semibold mb-4">Our Mission & Beliefs</h4>
-            <p class="text-gray-700 mb-4">
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
               **Mission:** To make disciples who love God, love one another, and
               serve our community.
             </p>
-            <p class="text-gray-700 mb-4">**Core Beliefs:**</p>
-            <ul class="list-disc list-inside text-gray-600 text-left space-y-2">
+            <p class="text-gray-700 dark:text-gray-300 mb-4">**Core Beliefs:**</p>
+            <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 text-left space-y-2">
               <li>
                 We believe in one God, eternally existing in three persons: the
                 Father, the Son, and the Holy Spirit.
@@ -694,7 +666,7 @@
           </div>
           <div class="text-center">
             <h4 class="text-2xl font-bold mb-4">Meet Our Pastor</h4>
-            <div class="inline-block bg-white p-6 rounded-2xl shadow-md">
+            <div class="inline-block bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-md">
               <img
                 loading="lazy"
                 src="img/Pastor Mark.jpg"
@@ -702,11 +674,11 @@
                 class="rounded-full mx-auto mb-4 w-32 h-32 md:w-48 md:h-48 object-cover"
               />
               <h5 class="text-xl font-semibold">Prophet Mark Makoyawo</h5>
-              <p class="text-gray-600 text-sm italic">
+              <p class="text-gray-600 dark:text-gray-300 text-sm italic">
                 "I am passionate about seeing lives transformed by the power of
                 Jesus Christ."
               </p>
-              <p class="text-gray-700 mt-4">
+              <p class="text-gray-700 dark:text-gray-300 mt-4">
                 Prophet Mark Makoyawo has faithfully served in ministry for more
                 than a decade, sharing the love of Christ and guiding people
                 into a deeper relationship with God. Known for his compassion,
@@ -722,7 +694,7 @@
     </section>
 
     <!-- Sermons Section -->
-    <section class="py-16 md:py-24 bg-white" id="sermons">
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-800" id="sermons">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl md:text-4xl font-bold section-heading">
           Sermon Archives
@@ -734,7 +706,7 @@
               <label for="speaker-select" class="text-gray-600">Speaker:</label>
               <select
                 id="speaker-select"
-                class="rounded-md border-gray-300 shadow-sm p-2"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm p-2"
               >
                 <option value="all">All Speakers</option>
                 <option value="pastor-name">Prophet Mark Makoyawo</option>
@@ -745,7 +717,7 @@
               <label for="sort-select" class="text-gray-600">Sort by:</label>
               <select
                 id="sort-select"
-                class="rounded-md border-gray-300 shadow-sm p-2"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm p-2"
               >
                 <option value="date-desc">Newest First</option>
                 <option value="date-asc">Oldest First</option>
@@ -812,7 +784,7 @@
               >
               <select
                 id="youtube-speaker-select"
-                class="rounded-md border-gray-300 shadow-sm p-2"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm p-2"
               >
                 <option value="all">All Speakers</option>
                 <option value="pastor-name">Prophet Mark Makoyawo</option>
@@ -825,7 +797,7 @@
               >
               <select
                 id="youtube-sort-select"
-                class="rounded-md border-gray-300 shadow-sm p-2"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm p-2"
               >
                 <option value="date">Newest First</option>
                 <option value="relevance">Most Relevant</option>
@@ -861,22 +833,22 @@
     </section>
 
     <!-- Ministries Section -->
-    <section class="py-16 md:py-24 bg-gray-50" id="ministries">
+    <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-800" id="ministries">
       <div class="container mx-auto px-4 text-center">
         <h2
-          class="text-3xl md:text-4xl font-bold section-heading text-blue-600"
+          class="text-3xl md:text-4xl font-bold section-heading text-blue-600 dark:text-blue-400"
         >
           Our Ministries
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div
-            class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
+            class="ministry-card bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
           >
             <i class="fas fa-users text-4xl text-indigo-600 mb-4"></i>
             <h3 class="text-xl font-semibold mb-2 text-blue-600">
               Youth Ministry
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-300">
               A place for young people to connect, grow in their faith, and have
               fun.
             </p>
@@ -888,13 +860,13 @@
             </button>
           </div>
           <div
-            class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
+            class="ministry-card bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
           >
             <i class="fas fa-female text-4xl text-indigo-600 mb-4"></i>
             <h3 class="text-xl font-semibold mb-2 text-blue-600">
               Women's Ministry
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-300">
               A community for women to support each other through fellowship and
               Bible study.
             </p>
@@ -906,13 +878,13 @@
             </button>
           </div>
           <div
-            class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
+            class="ministry-card bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
           >
             <i class="fas fa-male text-4xl text-indigo-600 mb-4"></i>
             <h3 class="text-xl font-semibold mb-2 text-blue-600">
               Men's Ministry
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-300">
               A group for men to build strong relationships and be discipled as
               leaders.
             </p>
@@ -924,13 +896,13 @@
             </button>
           </div>
           <div
-            class="ministry-card bg-white p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
+            class="ministry-card bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-md flex flex-col items-center text-center"
           >
             <i class="fas fa-music text-4xl text-indigo-600 mb-4"></i>
             <h3 class="text-xl font-semibold mb-2 text-blue-600">
               Music & Worship
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-300">
               The team that leads the congregation in praise and worship,
               glorifying God through song.
             </p>
@@ -946,12 +918,12 @@
     </section>
 
     <!-- Events Section (Calendar) -->
-    <section class="py-16 md:py-24 bg-white" id="events">
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-800" id="events">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl md:text-4xl font-bold section-heading">
           Upcoming Events
         </h2>
-        <div class="bg-gray-100 p-8 rounded-2xl shadow-md max-w-4xl mx-auto">
+        <div class="bg-gray-100 dark:bg-gray-700 p-8 rounded-2xl shadow-md max-w-4xl mx-auto">
           <div class="flex justify-between items-center mb-6">
             <button id="prev-month" class="text-indigo-600 font-bold text-xl">
               &lt;
@@ -964,7 +936,7 @@
             </button>
           </div>
           <div
-            class="grid grid-cols-7 text-center font-semibold text-gray-700 mb-2"
+            class="grid grid-cols-7 text-center font-semibold text-gray-700 dark:text-gray-300 mb-2"
           >
             <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span
             ><span>Thu</span><span>Fri</span><span>Sat</span>
@@ -1046,21 +1018,21 @@
     </section>
 
     <!-- Contact Us Section -->
-    <section class="py-16 md:py-24 bg-white" id="contact">
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-800" id="contact">
       <div class="container mx-auto px-4 text-center">
         <h2
-          class="text-3xl md:text-4xl font-bold section-heading text-blue-600"
+          class="text-3xl md:text-4xl font-bold section-heading text-blue-600 dark:text-blue-400"
         >
           Contact Us
         </h2>
         <div class="max-w-4xl mx-auto">
           <div class="flex flex-col md:flex-row gap-8 mb-8">
-            <div class="bg-gray-100 p-8 rounded-2xl shadow-md flex-1 text-left">
+            <div class="bg-gray-100 dark:bg-gray-700 p-8 rounded-2xl shadow-md flex-1 text-left">
               <h3 class="text-xl font-bold mb-4">Our Location</h3>
-              <p class="text-gray-700 mb-4 font-medium">
+              <p class="text-gray-700 dark:text-gray-300 mb-4 font-medium">
                 True Light Christian Centre
               </p>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
                 Lot 5 Block 7 Phase 1D, Vista Verde Ave. Vista Verde (
                 Koneksiyon Famous Wings) North Executive Village, Caloocan,
                 Philippines
@@ -1076,17 +1048,17 @@
               </div>
             </div>
 
-            <div class="bg-gray-100 p-8 rounded-2xl shadow-md flex-1 text-left">
+            <div class="bg-gray-100 dark:bg-gray-700 p-8 rounded-2xl shadow-md flex-1 text-left">
               <h3 class="text-xl font-bold mb-4">Get in Touch</h3>
               <div class="space-y-4 mb-8">
-                <p class="text-gray-700">
+                <p class="text-gray-700 dark:text-gray-300">
                   <span class="font-semibold">Phone:</span> (02) 123-4567
                 </p>
-                <p class="text-gray-700">
+                <p class="text-gray-700 dark:text-gray-300">
                   <span class="font-semibold">Email:</span>
                   info@graceandtruth.ph
                 </p>
-                <p class="text-gray-700">
+                <p class="text-gray-700 dark:text-gray-300">
                   <span class="font-semibold">Facebook:</span>
                   <a
                     href="https://www.facebook.com/yourchurchpage"
@@ -1107,28 +1079,28 @@
                   type="text"
                   name="name"
                   placeholder="Name"
-                  class="p-2 w-full"
+                  class="p-2 w-full border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   required
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
-                  class="p-2 w-full"
+                  class="p-2 w-full border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   required
                 />
                 <input
                   type="text"
                   name="subject"
                   placeholder="Subject"
-                  class="p-2 w-full"
+                  class="p-2 w-full border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   required
                 />
                 <textarea
                   name="message"
                   rows="4"
                   placeholder="Message"
-                  class="p-2 w-full"
+                  class="p-2 w-full border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   required
                 ></textarea>
                 <button
@@ -1251,3 +1223,4 @@
     <script src="script.js"></script>
   </body>
 </html>
+
