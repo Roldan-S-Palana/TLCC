@@ -14,11 +14,21 @@
     ></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {},
+        },
+        plugins: [],
+      }
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <!-- Decorative floating elements -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
     <div
+    
       class="absolute top-20 left-10 w-2 h-2 bg-indigo-400 rounded-full opacity-60 animate-pulse"
     ></div>
     <div
