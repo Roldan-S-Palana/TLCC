@@ -357,42 +357,31 @@ function loadYouTubeVideos(order = 'date', pageToken = null, speaker = 'all') {
     url += `&pageToken=${pageToken}`;
   }
 
-  const cacheKey = `ytCache_${order}_${pageToken || 'null'}_${speaker}`;
-  const cached = JSON.parse(localStorage.getItem(cacheKey));
+  // Show loading message
+  container.innerHTML = '<p class="text-center text-gray-600 col-span-full">Loading videos...</p>';
 
-  if (cached && (Date.now() - cached.timestamp < CACHE_TIME)) {
-    // Use cached data
-    processAndDisplayData(cached.data, speaker);
-  } else {
-    // Show loading message
-    container.innerHTML = '<p class="text-center text-gray-600 col-span-full">Loading videos...</p>';
+  // Disable buttons during loading
+  if (prevBtn) prevBtn.disabled = true;
+  if (nextBtn) nextBtn.disabled = true;
 
-    // Disable buttons during loading
-    if (prevBtn) prevBtn.disabled = true;
-    if (nextBtn) nextBtn.disabled = true;
-
-    fetch(url)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then(data => {
-        // Cache the data
-        localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
-
-        // Process and display
-        processAndDisplayData(data, speaker);
-      })
-      .catch(err => {
-        console.error('Error fetching YouTube videos:', err);
-        container.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load videos. Please try again later.</p>';
-        // Re-enable buttons on error
-        if (prevBtn) prevBtn.disabled = false;
-        if (nextBtn) nextBtn.disabled = false;
-      });
-  }
+  fetch(url)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => {
+      // Process and display
+      processAndDisplayData(data, speaker);
+    })
+    .catch(err => {
+      console.error('Error fetching YouTube videos:', err);
+      container.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load videos. Please try again later.</p>';
+      // Re-enable buttons on error
+      if (prevBtn) prevBtn.disabled = false;
+      if (nextBtn) nextBtn.disabled = false;
+    });
 }
 
 // Event listeners for sorting and pagination

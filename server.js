@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname)));
 
 // YouTube API proxy
 app.get('/api/videos', async (req, res) => {
-  const { order = 'date', pageToken, speaker = 'all', maxResults = 6 } = req.query;
+  const { order = 'date', pageToken, maxResults = 6 } = req.query;
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = process.env.YOUTUBE_CHANNEL_ID;
 
@@ -20,7 +20,7 @@ app.get('/api/videos', async (req, res) => {
     return res.status(500).json({ error: 'API key or channel ID not configured' });
   }
 
-  let url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=${order}&maxResults=${maxResults}`;
+  let url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=${order}&maxResults=${maxResults}&type=video`;
   if (pageToken) {
     url += `&pageToken=${pageToken}`;
   }
