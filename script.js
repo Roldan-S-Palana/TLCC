@@ -352,7 +352,10 @@ function loadYouTubeVideos(order = 'date', pageToken = null, speaker = 'all') {
 
   if (!container) return;
 
-  let url = `/api/videos?order=${order}&maxResults=${maxResults}&speaker=${speaker}`;
+  // For static hosting, use YouTube API directly
+  const apiKey = 'AIzaSyBOMouX-G0GDkvU6X46_KiQvsXeTN6-RDU';
+  const channelId = 'UCBbABuoqT0g8lwbg7gpMCpw';
+  let url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=${order}&maxResults=${maxResults}&type=video`;
   if (pageToken) {
     url += `&pageToken=${pageToken}`;
   }
