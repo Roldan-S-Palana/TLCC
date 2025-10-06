@@ -507,4 +507,132 @@ filterSermons();
 renderCalendar();
 
 // YouTube API key loaded
+// Gallery Carousel Functionality
+let currentSlide = 0;
+const carousel = document.getElementById('gallery-carousel');
+const slides = document.querySelectorAll('.gallery-slide');
+const indicators = document.querySelectorAll('.carousel-indicator');
+const prevSlideBtn = document.getElementById('prev-slide');
+const nextSlideBtn = document.getElementById('next-slide');
+
+function updateCarousel() {
+  if (!carousel || slides.length === 0) return;
+
+  carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+  // Update indicators
+  indicators.forEach((indicator, index) => {
+    if (index === currentSlide) {
+      indicator.classList.add('bg-white');
+      indicator.classList.remove('bg-white/50');
+    } else {
+      indicator.classList.add('bg-white/50');
+      indicator.classList.remove('bg-white');
+    }
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateCarousel();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  updateCarousel();
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateCarousel();
+}
+
+// Scroll-triggered animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+    }
+  });
+}, observerOptions);
+
+// Observe sections for animation
+document.querySelectorAll('section').forEach(section => {
+  observer.observe(section);
+});
+
+// Add fade-in animation class
+document.addEventListener('DOMContentLoaded', () => {
+  const style = document.createElement('style');
+  style.textContent = `
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    section.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger animation for child elements */
+    section.animate-in > * {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    section.animate-in > *:nth-child(1) { animation-delay: 0.1s; }
+    section.animate-in > *:nth-child(2) { animation-delay: 0.2s; }
+    section.animate-in > *:nth-child(3) { animation-delay: 0.3s; }
+    section.animate-in > *:nth-child(4) { animation-delay: 0.4s; }
+    section.animate-in > *:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+});
+// Event listeners
+if (nextSlideBtn) {
+  nextSlideBtn.addEventListener('click', nextSlide);
+}
+
+if (prevSlideBtn) {
+  prevSlideBtn.addEventListener('click', prevSlide);
+}
+
+// Indicator click handlers
+indicators.forEach((indicator, index) => {
+  indicator.addEventListener('click', () => goToSlide(index));
+});
+
+// Auto-play carousel
+let carouselInterval = setInterval(nextSlide, 5000);
+
+// Pause on hover
+if (carousel) {
+  carousel.addEventListener('mouseenter', () => {
+    clearInterval(carouselInterval);
+  });
+
+  carousel.addEventListener('mouseleave', () => {
+    carouselInterval = setInterval(nextSlide, 5000);
+  });
+}
+
+// Initialize carousel
+updateCarousel();
 console.log('YouTube API key loaded');
