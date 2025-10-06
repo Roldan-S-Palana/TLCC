@@ -547,6 +547,64 @@ function goToSlide(index) {
   updateCarousel();
 }
 
+// Dark Mode Functionality
+const themeToggle = document.getElementById('theme-toggle');
+const sunIcon = document.getElementById('sun-icon');
+const moonIcon = document.getElementById('moon-icon');
+
+// Check for saved theme preference or default to light mode
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+  document.documentElement.classList.add('dark');
+  if (moonIcon) moonIcon.classList.add('hidden');
+  if (sunIcon) sunIcon.classList.remove('hidden');
+} else {
+  document.documentElement.classList.remove('dark');
+  if (sunIcon) sunIcon.classList.add('hidden');
+  if (moonIcon) moonIcon.classList.remove('hidden');
+}
+
+// Toggle theme function
+function toggleTheme() {
+  const html = document.documentElement;
+  const isCurrentlyDark = html.classList.contains('dark');
+
+  if (isCurrentlyDark) {
+    // Switch to light mode
+    html.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+    if (sunIcon) sunIcon.classList.add('hidden');
+    if (moonIcon) moonIcon.classList.remove('hidden');
+  } else {
+    // Switch to dark mode
+    html.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    if (moonIcon) moonIcon.classList.add('hidden');
+    if (sunIcon) sunIcon.classList.remove('hidden');
+  }
+}
+
+// Event listener for theme toggle
+if (themeToggle) {
+  themeToggle.addEventListener('click', toggleTheme);
+}
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    if (e.matches) {
+      document.documentElement.classList.add('dark');
+      if (moonIcon) moonIcon.classList.add('hidden');
+      if (sunIcon) sunIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      if (sunIcon) sunIcon.classList.add('hidden');
+      if (moonIcon) moonIcon.classList.remove('hidden');
+    }
+  }
+});
 // Scroll-triggered animations
 const observerOptions = {
   threshold: 0.1,

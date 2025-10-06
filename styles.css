@@ -325,6 +325,118 @@ img, iframe, video {
 
 .video-card iframe {
   border: none;
+/* What to Expect Section Dark Mode */
+.dark #what-to-expect {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+/* What to Expect Section Animations */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-5px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Enhanced What to Expect cards */
+#what-to-expect .group:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+#what-to-expect .group:hover .bg-blue-100,
+#what-to-expect .group:hover .dark\:bg-blue-900 {
+  transform: scale(1.1);
+}
+
+#what-to-expect .group:hover .bg-indigo-100,
+#what-to-expect .group:hover .dark\:bg-indigo-900 {
+  transform: scale(1.1);
+}
+/* Dark Mode Styles */
+.dark .section-heading {
+  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .section-heading::after {
+  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+}
+
+.dark .btn-primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.dark .btn-primary:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+}
+
+.dark .ministry-card {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+.dark .ministry-card:hover {
+  background: linear-gradient(135deg, #374151 0%, #312e81 100%);
+}
+
+.dark .video-card {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+.dark .video-card:hover {
+  background: linear-gradient(135deg, #374151 0%, #312e81 100%);
+}
+
+.dark .modal-content {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+/* Dark mode section backgrounds */
+.dark #welcome-message {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.dark #about {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.dark #ministries {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.dark #events {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.dark #contact {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Dark mode text colors */
+.dark .text-gray-600 { color: #d1d5db; }
+.dark .text-gray-700 { color: #9ca3af; }
+.dark .text-gray-800 { color: #e5e7eb; }
+.dark .text-indigo-600 { color: #818cf8; }
+.dark .text-yellow-600 { color: #fbbf24; }
+.dark .text-blue-600 { color: #60a5fa; }
+
+/* Dark mode background colors */
+.dark .bg-white { background-color: #1f2937; }
+.dark .bg-gray-50 { background-color: #111827; }
+.dark .bg-gray-100 { background-color: #374151; }
+.dark .bg-blue-800 { background-color: #1e3a8a; }
+.dark .bg-blue-900 { background-color: #1e293b; }
+.dark .bg-blue-950 { background-color: #0f172a; }
+
+/* Dark mode hover states */
+.dark .hover\:bg-indigo-100:hover { background-color: #312e81; }
+.dark .hover\:bg-gray-100:hover { background-color: #374151; }
 /* Enhanced hover effects and glowing gradients */
 .btn-primary {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
@@ -497,4 +609,32 @@ input:focus, textarea:focus {
   background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
+
+/* Dark mode custom classes */
+.dark .dark-bg-gray-900 { background-color: #111827; }
+.dark .dark-bg-gray-800 { background-color: #1f2937; }
+.dark .dark-text-white { color: #ffffff; }
+.dark .dark-text-gray-400 { color: #9ca3af; }
+.dark .dark-hover-text-gray-100:hover { color: #f3f4f6; }
+.dark .dark-hover-bg-gray-700:hover { background-color: #374151; }
+.dark .dark-text-gray-200 { color: #e5e7eb; }
+.dark .dark-hover-text-indigo-400:hover { color: #818cf8; }
+.dark .dark-hover-bg-gray-700:hover { background-color: #374151; }
+.dark .dark-text-gray-300 { color: #d1d5db; }
+.dark .dark-bg-gray-700 { background-color: #374151; }
+.dark .dark-text-gray-400 { color: #9ca3af; }
+.dark .dark-bg-blue-900 { background-color: #1e3a8a; }
+.dark .dark-bg-indigo-900 { background-color: #312e81; }
+.dark .dark-bg-blue-800 { background-color: #1e40af; }
+.dark .dark-text-gray-500 { color: #6b7280; }
+.dark .dark-border-gray-600 { border-color: #4b5563; }
+.dark .dark-text-blue-400 { color: #60a5fa; }
+.dark .dark-text-indigo-500 { color: #6366f1; }
+.dark .dark-text-blue-600 { color: #2563eb; }
+.dark .dark-bg-blue-100 { background-color: #dbeafe; }
+.dark .dark-bg-indigo-100 { background-color: #e0e7ff; }
+.dark .dark-bg-blue-800 { background-color: #1e40af; }
+.dark .dark-bg-indigo-800 { background-color: #312e81; }
+.dark .dark-hover-text-gray-300:hover { color: #d1d5db; }
+.dark .dark-border-gray-700 { border-color: #374151; }
 }
